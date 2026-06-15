@@ -34,7 +34,7 @@ export default function Home() {
       fontFamily: "Arial"
     }}>
       <h1 style={{ marginBottom: "20px" }}>
-        🏆 Sweepstake Dashboard
+        🏆 WTL World Cup 2026 Leaderboard
       </h1>
 
       <table style={{ width: "100%", borderCollapse: "collapse" }}>
