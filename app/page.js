@@ -80,12 +80,7 @@ export default function Home() {
           const cols = row.split(",");
 
           const animationStyle = `
-  @keyframes pulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.15); opacity: 0.7; }
-    100% { transform: scale(1); opacity: 1; }
-  }
-`;
+
           return {
             player: cols[0],
             team1: cols[1],
