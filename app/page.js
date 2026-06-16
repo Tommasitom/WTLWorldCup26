@@ -120,7 +120,7 @@ export default function Home() {
             playerA: playerA || "",
             playerB: playerB || "",
             kickoff: kickoff || "",
-            status: cols[5] || ""
+            status: cols[7] || ""
           });
         });
 
