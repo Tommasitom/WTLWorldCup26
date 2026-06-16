@@ -219,8 +219,6 @@ const styles = {
   right: { width: "35%", textAlign: "right" },
   center: { width: "30%", textAlign: "center" },
   players: { fontSize: "12px", opacity: 0.7 },
-
-  // ✅ FIXED: these MUST be inside styles
  podium: {
   display: "flex",
   justifyContent: "center",
