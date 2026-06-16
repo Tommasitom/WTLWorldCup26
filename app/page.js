@@ -1,23 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-const flags = {
-  Spain: "🇪🇸",
-  Germany: "🇩🇪",
-  Mexico: "🇲🇽",
-  Brazil: "🇧🇷",
-  Uruguay: "🇺🇾",
-  "South Africa": "🇿🇦",
-  Paraguay: "🇵🇾",
-  USA: "🇺🇸",
-  Curacao: "🇨🇼",
-  "Curaçao": "🇨🇼",
-  "Cabo Verde": "🇨🇻",
-  "Cape Verde Islands": "🇨🇻",
-  Canada: "🇨🇦",
-  Bosnia: "🇧🇦",
-};
-``
+
 export default function Home() {
   const [leaderboard, setLeaderboard] = useState([]);
   const [matches, setMatches] = useState([]);
@@ -32,10 +16,10 @@ export default function Home() {
         const data = rows.map((row) => {
           const cols = row.split(",");
           return {
-            player: cols[0],
-            team1: cols[1],
-            team2: cols[2],
-            points: cols[3],
+            player: cols[0] || "",
+            team1: cols[1] || "",
+            team2: cols[2] || "",
+            points: cols[3] || "",
           };
         });
 
@@ -48,33 +32,32 @@ export default function Home() {
       .then((text) => {
         const rows = text.split("\n").slice(1);
 
-       const data = rows.map((row) => {
-  const cols = row.split(",");
-  return {
-    teamA: cols[1] || "",
-    teamB: cols[2] || "",
-    scoreA: cols[3] || "-",
-    scoreB: cols[4] || "-",
-    playerA: cols[13] || "",
-    playerB: cols[14] || "",
-  };
-});
-
+        const data = rows.map((row) => {
+          const cols = row.split(",");
+          return {
+            teamA: cols[1] || "",
+            teamB: cols[2] || "",
+            scoreA: cols[3] || "-",
+            scoreB: cols[4] || "-",
+            playerA: cols[13] || "",
+            playerB: cols[14] || "",
+          };
+        });
 
         setMatches(data);
       });
-
   }, []);
 
   return (
-    <div style={{
-      background: "#0f172a",
-      color: "white",
-      minHeight: "100vh",
-      padding: "30px",
-      fontFamily: "Arial"
-    }}>
-
+    <div
+      style={{
+        background: "#0f172a",
+        color: "white",
+        minHeight: "100vh",
+        padding: "30px",
+        fontFamily: "Arial",
+      }}
+    >
       {/* ✅ TITLE */}
       <h1 style={{ marginBottom: "20px" }}>
         🏆 WTL World Cup 2026
@@ -94,61 +77,65 @@ export default function Home() {
         </thead>
 
         <tbody>
-          {leaderboard.map((r, i) => (
-            <tr key={i}>
-              <td style={cell}>{r.player}</td>
-              <td style={cell}>{r.team1}</td>
-              <td style={cell}>{r.team2}</td>
-              <td style={cell}>{r.points}</td>
-            </tr>
-          ))}
+          {leaderboard.map((r, i) => {
+            return (
+              <tr key={i}>
+                <td style={cell}>{r.player}</td>
+                <td style={cell}>{r.team1}</td>
+                <td style={cell}>{r.team2}</td>
+                <td style={cell}>{r.points}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
 
       {/* ✅ MATCH CENTRE */}
-<h2>⚽ Match Centre</h2>
+      <h2>⚽ Match Centre</h2>
 
-<div>
-  {matches.map((m, i) => {
-    return (
-      <div key={i} style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        background: "#1e293b",
-        padding: "12px 16px",
-        marginBottom: "10px",
-        borderRadius: "10px"
-      }}>
+      <div>
+        {matches.map((m, i) => {
+          return (
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                background: "#1e293b",
+                padding: "12px 16px",
+                marginBottom: "10px",
+                borderRadius: "10px",
+              }}
+            >
+              {/* LEFT */}
+              <div style={{ width: "30%" }}>
+                {m.teamA}
+              </div>
 
-        {/* LEFT TEAM */}
-        <div style={{ width: "30%" }}>
-          {m.teamA} {m.scoreA}
-        </div>
+              {/* MIDDLE */}
+              <div style={{ textAlign: "center", width: "40%" }}>
+                <div style={{ fontWeight: "bold" }}>
+                  {m.scoreA} – {m.scoreB}
+                </div>
+                <div style={{ fontSize: "12px", opacity: 0.7 }}>
+                  {m.playerA} vs {m.playerB}
+                </div>
+              </div>
 
-        {/* MIDDLE */}
-        <div style={{ textAlign: "center", width: "40%" }}>
-          <div style={{ fontWeight: "bold" }}>
-            {m.scoreA} – {m.scoreB}
-          </div>
-          <div style={{ fontSize: "12px", opacity: 0.7 }}>
-            {m.playerA} vs {m.playerB}
-          </div>
-        </div>
-
-        {/* RIGHT TEAM */}
-        <div style={{ width: "30%", textAlign: "right" }}>
-          {m.scoreB} {m.teamB}
-        </div>
-
+              {/* RIGHT */}
+              <div style={{ width: "30%", textAlign: "right" }}>
+                {m.teamB}
+              </div>
+            </div>
+          );
+        })}
       </div>
-    );
-  })}
-</div>
-
-
+    </div>
+  );
+}
 
 const cell = {
   padding: "10px",
-  borderBottom: "1px solid #334155"
+  borderBottom: "1px solid #334155",
 };
