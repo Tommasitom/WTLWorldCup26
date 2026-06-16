@@ -135,7 +135,11 @@ export default function Home() {
      
 <div style={styles.header}>
 
-  <img src="WTL World Cup.png" style={styles.logo} />
+  <img 
+    src="/wtl-logo.png" 
+    style={styles.logo} 
+    alt="WTL Logo"
+  />
 
   <p style={styles.subtitle}>Live leaderboard & match results</p>
 
