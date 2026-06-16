@@ -121,15 +121,13 @@ export default function Home() {
   return (
     <div style={styles.page}>
 
-      {/* ✅ HEADER */}
       <div style={styles.header}>
         <h1>🏆 WTL World Cup 2026</h1>
         <p style={styles.subtitle}>Live leaderboard & match results</p>
       </div>
 
-      {/* ✅ PODIUM */}
+      {/* PODIUM */}
       <div style={styles.podium}>
-
         {top3[1] && (
           <div style={{...styles.box, ...styles.second}}>
             <div style={styles.medal}>🥈</div>
@@ -153,10 +151,9 @@ export default function Home() {
             <div>{top3[2].points} pts</div>
           </div>
         )}
-
       </div>
 
-      {/* 🥄 WOODEN SPOON */}
+      {/* WOODEN SPOON */}
       {leaderboard.length > 0 && (
         <div style={styles.wooden}>
           🥄 Wooden Spoon: <strong>{leaderboard[leaderboard.length - 1].player}</strong> ({leaderboard[leaderboard.length - 1].points} pts)
@@ -180,24 +177,40 @@ export default function Home() {
 
       <h2 style={styles.section}>⚽ Match Centre</h2>
 
-      {matches.map((m, i) => (
-        <div key={i} style={styles.card}>
+      {matches.map((m, i) => {
 
-          <div style={styles.left}>
-            {getFlag(m.teamA)} {m.teamA}
+        const isLive = Math.random() < 0.05;
+        const status = isLive ? "LIVE" : "FT";
+
+        return (
+          <div key={i} style={styles.card}>
+
+            <div style={styles.left}>
+              {getFlag(m.teamA)} {m.teamA}
+            </div>
+
+            <div style={styles.center}>
+
+              <div style={styles.status}>
+                <span style={status === "LIVE" ? styles.live : styles.ft}>
+                  {status}
+                </span>
+              </div>
+
+              <strong>{m.scoreA} – {m.scoreB}</strong>
+              <div style={styles.players}>
+                {m.playerA} vs {m.playerB}
+              </div>
+
+            </div>
+
+            <div style={styles.right}>
+              {m.teamB} {getFlag(m.teamB)}
+            </div>
+
           </div>
-
-          <div style={styles.center}>
-            <strong>{m.scoreA} – {m.scoreB}</strong>
-            <div style={styles.players}>{m.playerA} vs {m.playerB}</div>
-          </div>
-
-          <div style={styles.right}>
-            {m.teamB} {getFlag(m.teamB)}
-          </div>
-
-        </div>
-      ))}
+        );
+      })}
 
     </div>
   );
@@ -229,15 +242,13 @@ const styles = {
     padding: "18px",
     borderRadius: "12px",
     textAlign: "center",
-    background: "#1e293b",
-    boxShadow: "0 6px 16px rgba(0,0,0,0.4)"
+    background: "#1e293b"
   },
 
   first: {
     transform: "scale(1.4)",
     background: "#fbbf24",
-    color: "#000",
-    boxShadow: "0 0 20px rgba(251,191,36,0.7)"
+    color: "#000"
   },
 
   second: { marginTop: "20px" },
@@ -245,6 +256,7 @@ const styles = {
 
   medal: { fontSize: "24px" },
   medalBig: { fontSize: "34px" },
+
   firstName: { fontWeight: "bold", fontSize: "18px" },
 
   wooden: {
@@ -276,8 +288,26 @@ const styles = {
     padding: "14px 18px",
     marginBottom: "12px",
     borderRadius: "12px",
-    background: "#1e293b",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.4)"
+    background: "#1e293b"
+  },
+
+  status: {
+    marginBottom: "4px"
+  },
+
+  live: {
+    background: "#ef4444",
+    padding: "2px 6px",
+    borderRadius: "6px",
+    fontSize: "10px",
+    fontWeight: "bold"
+  },
+
+  ft: {
+    background: "#475569",
+    padding: "2px 6px",
+    borderRadius: "6px",
+    fontSize: "10px"
   },
 
   left: { width: "35%" },
