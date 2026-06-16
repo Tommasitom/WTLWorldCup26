@@ -8,6 +8,9 @@ function getFlag(team) {
 
   const t = team.toLowerCase();
 
+  // ✅ REMOVE PREFIXES LIKE "IR ", "NZ ", etc.
+  const clean = t.replace(/^[a-z]{2}\s+/i, "");
+
   const flags = {
     mexico: "🇲🇽",
     spain: "🇪🇸",
@@ -58,7 +61,7 @@ function getFlag(team) {
   };
 
   for (const key in flags) {
-    if (t.includes(key)) return flags[key];
+    if (clean.includes(key)) return flags[key];
   }
 
   return "";
