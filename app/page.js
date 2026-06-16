@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import logo from "../public-wtl-logo.png.png";
 ``
-
+import Image from "next/image";
 
 function getFlag(team) {
   if (!team) return "";
@@ -132,9 +132,16 @@ export default function Home() {
 
   return (
     <div style={styles.page}>
-      <div style={styles.header}>
+     
+<div style={styles.header}>
 
-        <img src={logo} style={styles.logo} />
+  <Image 
+    src="/public-wtl-logo.png.png"
+    alt="WTL Logo"
+    width={500}
+    height={200}
+  />
+
 
 
         <p style={styles.subtitle}>Live leaderboard & match results</p>
