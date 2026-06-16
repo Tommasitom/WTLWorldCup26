@@ -137,7 +137,8 @@ const top3 = leaderboard.slice(0, 3);
   return (
     <div style={styles.page}>
 
-      <h1 style={styles.title}>🏆 WTL World Cup 2026</h1> {/* ✅ PODIUM */}
+      <h1 style={styles.title}>🏆 WTL World Cup 2026</h1>
+  {/* ✅ PODIUM */}
 <div style={styles.podium}>
 
   {top3[1] && (
