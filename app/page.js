@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-// ✅ FLAG FUNCTION (robust)
+// ✅ FLAG FUNCTION (handles naming differences)
 function getFlag(team) {
   if (!team) return "";
 
@@ -34,7 +34,8 @@ export default function Home() {
   const [matches, setMatches] = useState([]);
 
   useEffect(() => {
-    // ✅ LEADERBOARD
+
+    // ✅ LEADERBOARD (YOUR LINK)
     fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTfR46oVSmS9_cnX_4USgkAp01jXRSqvWg9kjXEKhFjviCQFh3gHhNz1vTuL9-ppDHWB-lcjbD5SPg6/pub?gid=1476826283&single=true&output=csv")
       .then((res) => res.text())
       .then((text) => {
@@ -43,17 +44,17 @@ export default function Home() {
         const data = rows.map((row) => {
           const cols = row.split(",");
           return {
-            player: cols[0],
-            team1: cols[1],
-            team2: cols[2],
-            points: cols[3],
+            player: cols[0] || "",
+            team1: cols[1] || "",
+            team2: cols[2] || "",
+            points: cols[3] || "",
           };
         });
 
         setLeaderboard(data);
       });
 
-    // ✅ MATCH RESULTS
+    // ✅ MATCH RESULTS (YOUR LINK)
     fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTfR46oVSmS9_cnX_4USgkAp01jXRSqvWg9kjXEKhFjviCQFh3gHhNz1vTuL9-ppDHWB-lcjbD5SPg6/pub?gid=1047828395&single=true&output=csv")
       .then((res) => res.text())
       .then((text) => {
@@ -61,27 +62,30 @@ export default function Home() {
 
         const data = rows.map((row) => {
           const cols = row.split(",");
-          return {
-            teamA: cols[1],
-            teamB: cols[2],
-            scoreA: cols[3] || "-",
-            scoreB: cols[4] || "-",
-            playerA: cols[13],
-            playerB: cols[14],
-          };
-        });
 
-        setMatches(data.reverse()); // ✅ latest matches first
+          // ✅ Skip broken rows
+          if (!cols[1] || !cols[2]) return null;
+
+          return {
+            teamA: cols[1]?.trim(),
+            teamB: cols[2]?.trim(),
+            scoreA: cols[3]?.trim() || "-",
+            scoreB: cols[4]?.trim() || "-",
+            playerA: cols[13]?.trim() || "",
+            playerB: cols[14]?.trim() || "",
+          };
+        }).filter(Boolean);
+
+        // ✅ Show latest matches first
+        setMatches(data.reverse());
       });
+
   }, []);
 
   return (
     <div style={page}>
 
-      {/* ✅ HEADER */}
-      <h1 style={title}>
-        🏆 WTL World Cup 2026
-      </h1>
+      <h1 style={title}>🏆 WTL World Cup 2026</h1>
 
       {/* ✅ LEADERBOARD */}
       <h2 style={sectionTitle}>Leaderboard</h2>
@@ -142,7 +146,7 @@ export default function Home() {
   );
 }
 
-/* ✅ STYLES (clean + professional) */
+/* ✅ STYLING */
 
 const page = {
   background: "#0f172a",
