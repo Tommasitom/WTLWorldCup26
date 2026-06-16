@@ -103,13 +103,22 @@ export default function Home() {
           const teamB = cols[2];
           const scoreA = cols[3];
           const scoreB = cols[4];
-          const playerA = cols[13];
-          const playerB = cols[14];
+
+          // ✅ FIXED PLAYER CLEANING
+          const playerA = cols[13]?.trim();
+          const playerB = cols[14]?.trim();
 
           if (!teamA || !teamB) return;
           if (!scoreA || !scoreB || scoreA === "-" || scoreB === "-") return;
 
-          parsed.push({ teamA, teamB, scoreA, scoreB, playerA, playerB });
+          parsed.push({
+            teamA,
+            teamB,
+            scoreA,
+            scoreB,
+            playerA: playerA || "",
+            playerB: playerB || ""
+          });
         });
 
         setMatches(parsed.reverse());
@@ -152,12 +161,24 @@ export default function Home() {
         )}
       </div>
 
-      {/* 💰 PRIZE BOX */}
-      <div style={styles.prizeBox}>
-        <div>🥇 €150</div>
-        <div>🥈 €80</div>
-        <div>🥉 €40</div>
-        <div style={styles.spoonPrize}>🥄 €0 😅</div>
+      {/* 💰 PRIZES */}
+      <div style={styles.prizeContainer}>
+
+        <div style={styles.prizeBox}>
+          <div>🥇 €100</div>
+          <div>🥈 €50</div>
+          <div>🥉 €20</div>
+          <div style={styles.spoonPrize}>🥄 €20</div>
+        </div>
+
+        <div style={styles.sidePrizes}>
+          <div>🟥 First Red Card — €10</div>
+          <div>🎩 First Hat-Trick — €10</div>
+          <div>❌ First Missed Penalty — €10</div>
+          <div>⚽ Most Goals — €10</div>
+          <div>🥅 First Own Goal — €10</div>
+        </div>
+
       </div>
 
       {/* WOODEN SPOON */}
@@ -206,10 +227,12 @@ export default function Home() {
 
               <strong>{m.scoreA} – {m.scoreB}</strong>
 
-              {/* ✅ PLAYER NAMES */}
-              <div style={styles.players}>
-                {m.playerA || "TBC"} vs {m.playerB || "TBC"}
-              </div>
+              {/* ✅ FIXED PLAYER DISPLAY */}
+              {m.playerA && m.playerB && (
+                <div style={styles.players}>
+                  {m.playerA} vs {m.playerB}
+                </div>
+              )}
 
             </div>
 
@@ -230,8 +253,7 @@ const styles = {
     background: "#0f172a",
     color: "white",
     minHeight: "100vh",
-    padding: "30px",
-    fontFamily: "Arial"
+    padding: "30px"
   },
 
   header: { marginBottom: "25px" },
@@ -268,15 +290,31 @@ const styles = {
 
   firstName: { fontWeight: "bold", fontSize: "18px" },
 
+  prizeContainer: {
+    marginBottom: "40px"
+  },
+
   prizeBox: {
     display: "flex",
     justifyContent: "center",
-    gap: "30px",
-    marginBottom: "25px",
-    fontWeight: "bold"
+    gap: "40px",
+    marginBottom: "15px",
+    fontWeight: "bold",
+    fontSize: "16px"
   },
 
-  spoonPrize: { opacity: 0.6 },
+  sidePrizes: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: "15px",
+    fontSize: "13px",
+    opacity: 0.85
+  },
+
+  spoonPrize: {
+    opacity: 0.7
+  },
 
   wooden: {
     textAlign: "center",
@@ -333,3 +371,4 @@ const styles = {
 
   players: { fontSize: "12px", opacity: 0.7 }
 };
+``
