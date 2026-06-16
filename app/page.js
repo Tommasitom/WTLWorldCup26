@@ -1,6 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+const flags = {
+  Spain: "🇪🇸",
+  Germany: "🇩🇪",
+  Mexico: "🇲🇽",
+  Brazil: "🇧🇷",
+  Uruguay: "🇺🇾",
+  "South Africa": "🇿🇦",
+  Paraguay: "🇵🇾",
+  USA: "🇺🇸",
+  Canada: "🇨🇦",
+  Bosnia: "🇧🇦",
+  "Curaçao": "🇨🇼",
+  Curacao: "🇨🇼",
+  "Cabo Verde": "🇨🇻",
+  "Cape Verde Islands": "🇨🇻"
+};
 
 export default function Home() {
   const [leaderboard, setLeaderboard] = useState([]);
@@ -110,7 +126,7 @@ export default function Home() {
             >
               {/* LEFT */}
               <div style={{ width: "30%" }}>
-                {m.teamA}
+                {flags[m.teamA] || ""} {m.teamA}
               </div>
 
               {/* MIDDLE */}
@@ -125,7 +141,8 @@ export default function Home() {
 
               {/* RIGHT */}
               <div style={{ width: "30%", textAlign: "right" }}>
-                {m.teamB}
+                {m.teamB} {flags[m.teamB] || ""}
+``
               </div>
             </div>
           );
