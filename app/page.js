@@ -105,8 +105,9 @@ export default function Home() {
           const scoreB = cols[4];
 
           // ✅ FIXED PLAYER CLEANING
-          const playerA = cols[13]?.trim();
-          const playerB = cols[14]?.trim();
+         const playerA = cols[11]?.trim();
+const playerB = cols[12]?.trim();
+
 
           if (!teamA || !teamB) return;
           if (!scoreA || !scoreB || scoreA === "-" || scoreB === "-") return;
