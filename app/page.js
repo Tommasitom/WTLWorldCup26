@@ -234,13 +234,21 @@ export default function Home() {
               {getFlag(m.teamA)} {m.teamA}
             </div>
 
-            
+            <div style={styles.center}>
               <strong>{m.scoreA} – {m.scoreB}</strong>
 
               {status === "LIVE" && minute && (
                 <div style={styles.players}>
                   {minute}'
                 </div>
+              )}
+
+              {m.playerA && m.playerB && (
+                <div style={styles.players}>
+                  {m.playerA} vs {m.playerB}
+                </div>
+              )}
+            </div>
               )}
 
               {m.playerA && m.playerB && (
