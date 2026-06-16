@@ -262,23 +262,26 @@ const styles = {
     minHeight: "100vh",
     padding: "30px"
   },
-header: {
-header: {
-  marginBottom: "25px",
-  textAlign: "center"
-},
 
-logo: {
-  width: "100%",
-  maxWidth: "500px",
-  borderRadius: "12px",
-  boxShadow: "0 10px 25px rgba(0,0,0,0.6)",
-  marginBottom: "15px"
-},
+  header: {
+    marginBottom: "25px",
+    textAlign: "center"
+  },
 
-subtitle: {
-  opacity: 0.6
-},
+  logo: {
+    width: "100%",
+    maxWidth: "500px",
+    borderRadius: "12px",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.6)",
+    marginBottom: "15px"
+  },
+
+  subtitle: {
+    opacity: 0.6
+  },
+
+  // keep all your other styles below...
+};
 
 
   section: { marginTop: "20px", marginBottom: "10px" },
