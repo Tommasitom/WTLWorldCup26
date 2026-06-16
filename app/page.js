@@ -1,7 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+const flags = {
+  Spain: "🇪🇸",
+  Germany: "🇩🇪",
+  Mexico: "🇲🇽",
+  Brazil: "🇧🇷",
+  Uruguay: "🇺🇾",
+  "South Africa": "🇿🇦",
+  Paraguay: "🇵🇾",
+  USA: "🇺🇸",
+  Curacao: "🇨🇼",
+  "Curaçao": "🇨🇼",
+  "Cabo Verde": "🇨🇻",
+  "Cape Verde Islands": "🇨🇻",
+  Canada: "🇨🇦",
+  Bosnia: "🇧🇦",
+};
+``
 export default function Home() {
   const [leaderboard, setLeaderboard] = useState([]);
   const [matches, setMatches] = useState([]);
@@ -100,9 +116,36 @@ export default function Home() {
           marginBottom: "10px",
           borderRadius: "8px"
         }}>
-          <div>
-            {m.teamA} <strong>{m.scoreA}</strong>
-          </div>
+          <div style={{
+  display: "flex",
+  justifyContent: "space-between",
+  background: "#1e293b",
+  padding: "12px",
+  marginBottom: "10px",
+  borderRadius: "10px"
+}}>
+
+  {/* LEFT TEAM */}
+  <div style={{ width: "30%" }}>
+    {flags[m.teamA] || ""} {m.teamA}
+  </div>
+
+  {/* SCORE + PLAYERS */}
+  <div style={{ textAlign: "center", width: "40%" }}>
+    <div style={{ fontSize: "18px", fontWeight: "bold" }}>
+      {m.scoreA} – {m.scoreB}
+    </div>
+    <div style={{ fontSize: "12px", opacity: 0.7 }}>
+      {m.playerA} vs {m.playerB}
+    </div>
+  </div>
+
+  {/* RIGHT TEAM */}
+  <div style={{ textAlign: "right", width: "30%" }}>
+    {m.teamB} {flags[m.teamB] || ""}
+  </div>
+
+</div>
 
           <div>
             <strong>{m.playerA}</strong> vs <strong>{m.playerB}</strong>
