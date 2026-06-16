@@ -131,11 +131,14 @@ const playerB = cols[9]?.trim();
 
   return (
     <div style={styles.page}>
+<div style={styles.header}>
 
-      <div style={styles.header}>
-        <h1>🏆 WTL World Cup 2026</h1>
-        <p style={styles.subtitle}>Live leaderboard & match results</p>
-      </div>
+  <img src="/wtl-logo.png" style={styles.logo} />
+
+  <p style={styles.subtitle}>Live leaderboard & match results</p>
+
+</div>
+    
 
       {/* PODIUM */}
       <div style={styles.podium}>
@@ -260,6 +263,12 @@ const styles = {
   },
 
   header: { marginBottom: "25px" },
+logo: {
+  width: "350px",
+  maxWidth: "100%",
+  marginBottom: "10px",
+  borderRadius: "10px"
+},
   subtitle: { opacity: 0.6 },
 
   section: { marginTop: "20px", marginBottom: "10px" },
