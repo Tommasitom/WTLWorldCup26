@@ -146,12 +146,15 @@ export default function Home() {
         <div style={{ width: "35%", textAlign: "right" }}>
           {m.teamB}
           {flags[m.teamB] ? " " + flags[m.teamB] : ""}
-        </div>
-
       </div>
-    );
-  })}
+      );
+    })}
+  </div>
 </div>
+);
+}
+
+
 const cell = {
   padding: "10px",
   borderBottom: "1px solid #334155",
