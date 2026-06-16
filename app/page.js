@@ -97,6 +97,7 @@ export default function Home() {
         const parsed = [];
 
         rows.forEach(row => {
+          console.log(row.split(","));
           const cols = row.split(",");
 
           const teamA = cols[1];
