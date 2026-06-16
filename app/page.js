@@ -130,7 +130,7 @@ export default function Home() {
     <div style={styles.page}>
       <div style={styles.header}>
 
-        <img src="/wtl-logo.png" style={styles.logo} />
+        <img src="/public-wtl-logo.png.png" style={styles.logo} />
 
         <p style={styles.subtitle}>Live leaderboard & match results</p>
 
