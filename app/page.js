@@ -138,30 +138,30 @@ const top3 = leaderboard.slice(0, 3);
     <div style={styles.page}>
 
       <h1 style={styles.title}>🏆 WTL World Cup 2026</h1>
-  {/* ✅ PODIUM */}
+{/* ✅ PODIUM */}
 <div style={styles.podium}>
 
   {top3[1] && (
     <div style={{...styles.playerBox, order: 1}}>
       <div style={styles.medal}>🥈</div>
-      <div>{top3[1].player}</div>
-      <div style={styles.points}>{top3[1].points} pts</div>
+      <div>{top3[1][0]}</div>
+      <div style={styles.points}>{top3[1][3]} pts</div>
     </div>
   )}
 
   {top3[0] && (
     <div style={{...styles.playerBox, order: 2, transform:"scale(1.1)"}}>
       <div style={styles.medal}>🥇</div>
-      <div style={{fontWeight:"bold"}}>{top3[0].player}</div>
-      <div style={styles.points}>{top3[0].points} pts</div>
+      <div style={{fontWeight:"bold"}}>{top3[0][0]}</div>
+      <div style={styles.points}>{top3[0][3]} pts</div>
     </div>
   )}
 
   {top3[2] && (
     <div style={{...styles.playerBox, order: 3}}>
       <div style={styles.medal}>🥉</div>
-      <div>{top3[2].player}</div>
-      <div style={styles.points}>{top3[2].points} pts</div>
+      <div>{top3[2][0]}</div>
+      <div style={styles.points}>{top3[2][3]} pts</div>
     </div>
   )}
 
