@@ -112,19 +112,21 @@ export default function Home() {
           if (!teamA || !teamB) return;
           if (!scoreA || !scoreB || scoreA === "-" || scoreB === "-") return;
 
-        parsed.push({
-  teamA,
-  teamB,
-  scoreA,
-  scoreB,
-  playerA: playerA || "",
-  playerB: playerB || "",
-  kickoff: kickoff || "",
-  status: cols[5] || ""
-});
+          parsed.push({
+            teamA,
+            teamB,
+            scoreA,
+            scoreB,
+            playerA: playerA || "",
+            playerB: playerB || "",
+            kickoff: kickoff || "",
+            status: cols[5] || ""
+          });
+        });
 
- });
-setMatches(parsed.reverse());
+        setMatches(parsed.reverse());
+      });
+
   }, []);
 
   return (
@@ -206,28 +208,27 @@ setMatches(parsed.reverse());
 
       <h2 style={styles.section}>⚽ Match Centre</h2>
 
-{matches.map((m, i) => {
+      {matches.map((m, i) => {
 
-  const status = m.status;
-  const kickoff = m.kickoff;
+        const status = m.status;
+        const kickoff = m.kickoff;
 
-  let minute = "";
+        let minute = "";
 
-  if (status === "LIVE" && kickoff) {
-    const now = new Date();
-    const today = new Date().toISOString().split("T")[0];
+        if (status === "LIVE" && kickoff) {
+          const now = new Date();
+          const today = new Date().toISOString().split("T")[0];
 
-    const kickoffTime = new Date(`${today}T${kickoff}`);
-    const diff = Math.floor((now - kickoffTime) / 60000);
+          const kickoffTime = new Date(`${today}T${kickoff}`);
+          const diff = Math.floor((now - kickoffTime) / 60000);
 
-    if (diff > 0) {
-      minute = diff > 90 ? "90+" : diff;
-    }
-  }
+          if (diff > 0) {
+            minute = diff > 90 ? "90+" : diff;
+          }
+        }
 
- 
-return (
-  <div key={i} style={styles.card}>
+        return (
+          <div key={i} style={styles.card}>
 
             <div style={styles.left}>
               {getFlag(m.teamA)} {m.teamA}
@@ -241,11 +242,12 @@ return (
               </div>
 
               <strong>{m.scoreA} – {m.scoreB}</strong>
-{status === "LIVE" && minute && (
-  <div style={styles.players}>
-    {minute}'
-  </div>
-)}
+
+              {status === "LIVE" && minute && (
+                <div style={styles.players}>
+                  {minute}'
+                </div>
+              )}
 
               {m.playerA && m.playerB && (
                 <div style={styles.players}>
@@ -389,17 +391,17 @@ const styles = {
     fontWeight: "bold"
   },
 
+  liveDot: {
+    display: "inline-block",
+    width: "6px",
+    height: "6px",
+    borderRadius: "50%",
+    background: "#ef4444",
+    marginRight: "5px",
+    animation: "blink 1s infinite"
+  },
+
   ft: {
-    liveDot: {
-  display: "inline-block",
-  width: "6px",
-  height: "6px",
-  borderRadius: "50%",
-  background: "#ef4444",
-  marginRight: "5px",
-  animation: "blink 1s infinite"
-},
-ft: {
     background: "#475569",
     padding: "2px 6px",
     borderRadius: "6px",
