@@ -138,6 +138,7 @@ const playerB = cols[9]?.trim();
   <p style={styles.subtitle}>Live leaderboard & match results</p>
 
 </div>
+
     
 
       {/* PODIUM */}
@@ -261,15 +262,24 @@ const styles = {
     minHeight: "100vh",
     padding: "30px"
   },
-
-  header: { marginBottom: "25px" },
-logo: {
-  width: "350px",
-  maxWidth: "100%",
-  marginBottom: "10px",
-  borderRadius: "10px"
+header: {
+header: {
+  marginBottom: "25px",
+  textAlign: "center"
 },
-  subtitle: { opacity: 0.6 },
+
+logo: {
+  width: "100%",
+  maxWidth: "500px",
+  borderRadius: "12px",
+  boxShadow: "0 10px 25px rgba(0,0,0,0.6)",
+  marginBottom: "15px"
+},
+
+subtitle: {
+  opacity: 0.6
+},
+
 
   section: { marginTop: "20px", marginBottom: "10px" },
 
