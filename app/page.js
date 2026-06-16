@@ -69,7 +69,9 @@ function getFlag(team) {
 
 export default function Home() {
   const [leaderboard, setLeaderboard] = useState([]);
+  
   const [matches, setMatches] = useState([]);
+const top3 = leaderboard.slice(0, 3);
 
   useEffect(() => {
 
@@ -135,7 +137,34 @@ export default function Home() {
   return (
     <div style={styles.page}>
 
-      <h1 style={styles.title}>🏆 WTL World Cup 2026</h1>
+      <h1 style={styles.title}>🏆 WTL World Cup 2026</h1> {/* ✅ PODIUM */}
+<div style={styles.podium}>
+
+  {top3[1] && (
+    <div style={{...styles.playerBox, order: 1}}>
+      <div style={styles.medal}>🥈</div>
+      <div>{top3[1].player}</div>
+      <div style={styles.points}>{top3[1].points} pts</div>
+    </div>
+  )}
+
+  {top3[0] && (
+    <div style={{...styles.playerBox, order: 2, transform:"scale(1.1)"}}>
+      <div style={styles.medal}>🥇</div>
+      <div style={{fontWeight:"bold"}}>{top3[0].player}</div>
+      <div style={styles.points}>{top3[0].points} pts</div>
+    </div>
+  )}
+
+  {top3[2] && (
+    <div style={{...styles.playerBox, order: 3}}>
+      <div style={styles.medal}>🥉</div>
+      <div>{top3[2].player}</div>
+      <div style={styles.points}>{top3[2].points} pts</div>
+    </div>
+  )}
+
+</div>
 
       {/* ✅ LEADERBOARD */}
       <h2>Leaderboard</h2>
@@ -235,3 +264,27 @@ const styles = {
     opacity: 0.7
   }
 };
+podium: {
+  display: "flex",
+  justifyContent: "center",
+  gap: "20px",
+  marginBottom: "30px"
+},
+
+playerBox: {
+  background: "#1e293b",
+  padding: "15px",
+  borderRadius: "10px",
+  textAlign: "center",
+  width: "100px"
+},
+
+medal: {
+  fontSize: "24px",
+  marginBottom: "5px"
+},
+
+points: {
+  fontSize: "12px",
+  opacity: 0.7
+},
