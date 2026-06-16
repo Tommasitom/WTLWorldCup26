@@ -106,31 +106,47 @@ export default function Home() {
       </table>
 
       {/* ✅ MATCH CENTRE */}
-      <h2>⚽ Match Centre</h2>
 <h2>⚽ Match Centre</h2>
 
-{matches.map((m, i) => (
-  <div key={i} style={{
-    display: "flex",
-    justifyContent: "space-between",
-    background: "#1e293b",
-    padding: "12px",
-    marginBottom: "10px",
-    borderRadius: "8px"
-  }}>
-    <div>
-      {m.teamA} {m.scoreA}
-    </div>
+<div>
+  {matches.map((m, i) => {
+    return (
+      <div key={i} style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        background: "#1e293b",
+        padding: "12px 16px",
+        marginBottom: "10px",
+        borderRadius: "10px"
+      }}>
 
-    <div>
-      {m.playerA} vs {m.playerB}
-    </div>
+        {/* LEFT TEAM */}
+        <div style={{ width: "30%" }}>
+          {m.teamA} {m.scoreA}
+        </div>
 
-    <div>
-      {m.scoreB} {m.teamB}
-    </div>
-  </div>
-))}
+        {/* MIDDLE */}
+        <div style={{ textAlign: "center", width: "40%" }}>
+          <div style={{ fontWeight: "bold" }}>
+            {m.scoreA} – {m.scoreB}
+          </div>
+          <div style={{ fontSize: "12px", opacity: 0.7 }}>
+            {m.playerA} vs {m.playerB}
+          </div>
+        </div>
+
+        {/* RIGHT TEAM */}
+        <div style={{ width: "30%", textAlign: "right" }}>
+          {m.scoreB} {m.teamB}
+        </div>
+
+      </div>
+    );
+  })}
+</div>
+
+
 
 const cell = {
   padding: "10px",
