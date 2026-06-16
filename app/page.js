@@ -70,13 +70,7 @@ export default function Home() {
   const top3 = leaderboard.slice(0, 3);
 
   useEffect(() => {
-const animationStyle = `
-  @keyframes pulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.15); opacity: 0.7; }
-    100% { transform: scale(1); opacity: 1; }
-  }
-`;
+
     fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTfR46oVSmS9_cnX_4USgkAp01jXRSqvWg9kjXEKhFjviCQFh3gHhNz1vTuL9-ppDHWB-lcjbD5SPg6/pub?gid=1476826283&single=true&output=csv")
       .then(res => res.text())
       .then(text => {
@@ -84,6 +78,14 @@ const animationStyle = `
 
         const data = rows.map(row => {
           const cols = row.split(",");
+
+          const animationStyle = `
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+`;
           return {
             player: cols[0],
             team1: cols[1],
