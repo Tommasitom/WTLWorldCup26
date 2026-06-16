@@ -105,11 +105,8 @@ export default function Home() {
           const scoreA = cols[3];
           const scoreB = cols[4];
 
-          // ✅ FIXED PLAYER CLEANING
-const playerA = cols[8]?.trim();
-const playerB = cols[9]?.trim();
-``
-
+          const playerA = cols[8]?.trim();
+          const playerB = cols[9]?.trim();
 
           if (!teamA || !teamB) return;
           if (!scoreA || !scoreB || scoreA === "-" || scoreB === "-") return;
@@ -131,15 +128,13 @@ const playerB = cols[9]?.trim();
 
   return (
     <div style={styles.page}>
-<div style={styles.header}>
+      <div style={styles.header}>
 
-  <img src="/wtl-logo.png" style={styles.logo} />
+        <img src="/wtl-logo.png" style={styles.logo} />
 
-  <p style={styles.subtitle}>Live leaderboard & match results</p>
+        <p style={styles.subtitle}>Live leaderboard & match results</p>
 
-</div>
-
-    
+      </div>
 
       {/* PODIUM */}
       <div style={styles.podium}>
@@ -170,7 +165,6 @@ const playerB = cols[9]?.trim();
 
       {/* 💰 PRIZES */}
       <div style={styles.prizeContainer}>
-
         <div style={styles.prizeBox}>
           <div>🥇 €100</div>
           <div>🥈 €50</div>
@@ -185,7 +179,6 @@ const playerB = cols[9]?.trim();
           <div>⚽ Most Goals — €10</div>
           <div>🥅 First Own Goal — €10</div>
         </div>
-
       </div>
 
       {/* WOODEN SPOON */}
@@ -213,7 +206,6 @@ const playerB = cols[9]?.trim();
       <h2 style={styles.section}>⚽ Match Centre</h2>
 
       {matches.map((m, i) => {
-
         const isLive = Math.random() < 0.05;
         const status = isLive ? "LIVE" : "FT";
 
@@ -225,7 +217,6 @@ const playerB = cols[9]?.trim();
             </div>
 
             <div style={styles.center}>
-
               <div style={styles.status}>
                 <span style={status === "LIVE" ? styles.live : styles.ft}>
                   {status}
@@ -234,13 +225,11 @@ const playerB = cols[9]?.trim();
 
               <strong>{m.scoreA} – {m.scoreB}</strong>
 
-              {/* ✅ FIXED PLAYER DISPLAY */}
               {m.playerA && m.playerB && (
                 <div style={styles.players}>
                   {m.playerA} vs {m.playerB}
                 </div>
               )}
-
             </div>
 
             <div style={styles.right}>
@@ -250,7 +239,6 @@ const playerB = cols[9]?.trim();
           </div>
         );
       })}
-
     </div>
   );
 }
@@ -279,10 +267,6 @@ const styles = {
   subtitle: {
     opacity: 0.6
   },
-
-  // keep all your other styles below...
-};
-
 
   section: { marginTop: "20px", marginBottom: "10px" },
 
@@ -396,4 +380,3 @@ const styles = {
 
   players: { fontSize: "12px", opacity: 0.7 }
 };
-``
