@@ -123,9 +123,8 @@ export default function Home() {
   status: cols[5] || ""
 });
 
-        setMatches(parsed.reverse());
-      });
-
+ });
+setMatches(parsed.reverse());
   }, []);
 
   return (
@@ -226,8 +225,7 @@ export default function Home() {
     }
   }
 
-  return (
-    <div key={i} style={styles.card}>
+ 
 return (
   <div key={i} style={styles.card}>
 
@@ -401,7 +399,7 @@ const styles = {
   marginRight: "5px",
   animation: "blink 1s infinite"
 },
-
+ft: {
     background: "#475569",
     padding: "2px 6px",
     borderRadius: "6px",
