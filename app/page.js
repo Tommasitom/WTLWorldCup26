@@ -135,12 +135,11 @@ export default function Home() {
      
 <div style={styles.header}>
 
-  <img src="/public-wtl-logo.png.png" style={styles.logo} />
+  <img src="/public-wtl-logo.png.png" style={styles.logo} alt="logo" />
 
   <p style={styles.subtitle}>Live leaderboard & match results</p>
 
 </div>
-
 
 
 
@@ -256,13 +255,14 @@ export default function Home() {
 }
 
 const styles = {
- page: {
+page: {
   background: "#0f172a",
   color: "white",
   minHeight: "100vh",
   padding: "20px",
   overflowX: "hidden"
 },
+``
 
   header: {
     marginBottom: "25px",
