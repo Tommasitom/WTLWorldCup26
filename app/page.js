@@ -135,12 +135,12 @@ export default function Home() {
      
 <div style={styles.header}>
 
-  <Image 
-    src="/public-wtl-logo.png.png"
-    alt="WTL Logo"
-    width={500}
-    height={200}
-  />
+  <img src="WTL World Cup.png" style={styles.logo} />
+
+  <p style={styles.subtitle}>Live leaderboard & match results</p>
+
+</div>
+
 
 
 
@@ -256,12 +256,13 @@ export default function Home() {
 }
 
 const styles = {
-  page: {
-    background: "#0f172a",
-    color: "white",
-    minHeight: "100vh",
-    padding: "30px"
-  },
+ page: {
+  background: "#0f172a",
+  color: "white",
+  minHeight: "100vh",
+  padding: "20px",
+  overflowX: "hidden"
+},
 
   header: {
     marginBottom: "25px",
