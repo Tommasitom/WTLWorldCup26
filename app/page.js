@@ -7,20 +7,56 @@ function getFlag(team) {
 
   const t = team.toLowerCase();
   const clean = t.replace(/^[a-z]{2}\s+/i, "");
+const flags = {
+  mexico: "🇲🇽",
+  spain: "🇪🇸",
+  germany: "🇩🇪",
+  brazil: "🇧🇷",
+  argentina: "🇦🇷",
+  france: "🇫🇷",
+  england: "🏴",
+  portugal: "🇵🇹",
+  belgium: "🇧🇪",
+  netherlands: "🇳🇱",
+  japan: "🇯🇵",
+  sweden: "🇸🇪",
+  tunisia: "🇹🇳",
+  egypt: "🇪🇬",
+  iran: "🇮🇷",
+  "new zealand": "🇳🇿",
+  senegal: "🇸🇳",
+  norway: "🇳🇴",
+  algeria: "🇩🇿",
+  croatia: "🇭🇷",
+  ghana: "🇬🇭",
+  panama: "🇵🇦",
+  colombia: "🇨🇴",
+  switzerland: "🇨🇭",
+  qatar: "🇶🇦",
+  saudi: "🇸🇦",
+  iraq: "🇮🇶",
+  uzbekistan: "🇺🇿",
+  paraguay: "🇵🇾",
+  canada: "🇨🇦",
+  usa: "🇺🇸",
+  "south africa": "🇿🇦",
+  bosnia: "🇧🇦",
+  czech: "🇨🇿",
+  curacao: "🇨🇼",
+  "curaçao": "🇨🇼",
+  "cabo verde": "🇨🇻",
+  uruguay: "🇺🇾",
+  morocco: "🇲🇦",
+  australia: "🇦🇺",
+  turkey: "🇹🇷",
+  scotland: "🏴",
+  haiti: "🇭🇹",
+  ivory: "🇨🇮",
+  ecuador: "🇪🇨",
+  korea: "🇰🇷"
+};
+``
 
-  const flags = {
-    mexico: "🇲🇽",
-    spain: "🇪🇸",
-    germany: "🇩🇪",
-    brazil: "🇧🇷",
-    argentina: "🇦🇷",
-    france: "🇫🇷",
-    england: "🏴",
-    portugal: "🇵🇹",
-    canada: "🇨🇦",
-    usa: "🇺🇸",
-    "south africa": "🇿🇦"
-  };
 
   for (const key in flags) {
     if (clean.includes(key)) return flags[key];
