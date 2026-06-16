@@ -249,14 +249,6 @@ export default function Home() {
                 </div>
               )}
             </div>
-              )}
-
-              {m.playerA && m.playerB && (
-                <div style={styles.players}>
-                  {m.playerA} vs {m.playerB}
-                </div>
-              )}
-            </div>
 
             <div style={styles.right}>
               {m.teamB} {getFlag(m.teamB)}
