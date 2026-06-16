@@ -70,7 +70,13 @@ export default function Home() {
   const top3 = leaderboard.slice(0, 3);
 
   useEffect(() => {
-
+const animationStyle = `
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+`;
     fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTfR46oVSmS9_cnX_4USgkAp01jXRSqvWg9kjXEKhFjviCQFh3gHhNz1vTuL9-ppDHWB-lcjbD5SPg6/pub?gid=1476826283&single=true&output=csv")
       .then(res => res.text())
       .then(text => {
@@ -128,6 +134,7 @@ export default function Home() {
 
   return (
     <div style={styles.page}>
+    <style>{animationStyle}</style>
       <div style={styles.header}>
 
         <img src="/wtl.logo.png" alt="WTL World Cup Logo" style={styles.logo} />
@@ -360,12 +367,16 @@ const styles = {
   status: { marginBottom: "4px" },
 
   live: {
-    background: "#ef4444",
-    padding: "2px 6px",
-    borderRadius: "6px",
-    fontSize: "10px",
-    fontWeight: "bold"
-  },
+  background: "#ef4444",
+  padding: "4px 8px",
+  borderRadius: "6px",
+  fontSize: "10px",
+  fontWeight: "bold",
+  color: "white",
+  animation: "pulse 1.5s infinite",
+    boxShadow: "0 0 8px rgba(239,68,68,0.7)"
+},
+
 
   ft: {
     background: "#475569",
