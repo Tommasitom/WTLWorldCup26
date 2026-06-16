@@ -7,56 +7,55 @@ function getFlag(team) {
 
   const t = team.toLowerCase();
   const clean = t.replace(/^[a-z]{2}\s+/i, "");
-const flags = {
-  mexico: "🇲🇽",
-  spain: "🇪🇸",
-  germany: "🇩🇪",
-  brazil: "🇧🇷",
-  argentina: "🇦🇷",
-  france: "🇫🇷",
-  england: "🏴",
-  portugal: "🇵🇹",
-  belgium: "🇧🇪",
-  netherlands: "🇳🇱",
-  japan: "🇯🇵",
-  sweden: "🇸🇪",
-  tunisia: "🇹🇳",
-  egypt: "🇪🇬",
-  iran: "🇮🇷",
-  "new zealand": "🇳🇿",
-  senegal: "🇸🇳",
-  norway: "🇳🇴",
-  algeria: "🇩🇿",
-  croatia: "🇭🇷",
-  ghana: "🇬🇭",
-  panama: "🇵🇦",
-  colombia: "🇨🇴",
-  switzerland: "🇨🇭",
-  qatar: "🇶🇦",
-  saudi: "🇸🇦",
-  iraq: "🇮🇶",
-  uzbekistan: "🇺🇿",
-  paraguay: "🇵🇾",
-  canada: "🇨🇦",
-  usa: "🇺🇸",
-  "south africa": "🇿🇦",
-  bosnia: "🇧🇦",
-  czech: "🇨🇿",
-  curacao: "🇨🇼",
-  "curaçao": "🇨🇼",
-  "cabo verde": "🇨🇻",
-  uruguay: "🇺🇾",
-  morocco: "🇲🇦",
-  australia: "🇦🇺",
-  turkey: "🇹🇷",
-  scotland: "🏴",
-  haiti: "🇭🇹",
-  ivory: "🇨🇮",
-  ecuador: "🇪🇨",
-  korea: "🇰🇷"
-};
-``
 
+  const flags = {
+    mexico: "🇲🇽",
+    spain: "🇪🇸",
+    germany: "🇩🇪",
+    brazil: "🇧🇷",
+    argentina: "🇦🇷",
+    france: "🇫🇷",
+    england: "🏴",
+    portugal: "🇵🇹",
+    belgium: "🇧🇪",
+    netherlands: "🇳🇱",
+    japan: "🇯🇵",
+    sweden: "🇸🇪",
+    tunisia: "🇹🇳",
+    egypt: "🇪🇬",
+    iran: "🇮🇷",
+    "new zealand": "🇳🇿",
+    senegal: "🇸🇳",
+    norway: "🇳🇴",
+    algeria: "🇩🇿",
+    croatia: "🇭🇷",
+    ghana: "🇬🇭",
+    panama: "🇵🇦",
+    colombia: "🇨🇴",
+    switzerland: "🇨🇭",
+    qatar: "🇶🇦",
+    saudi: "🇸🇦",
+    iraq: "🇮🇶",
+    uzbekistan: "🇺🇿",
+    paraguay: "🇵🇾",
+    canada: "🇨🇦",
+    usa: "🇺🇸",
+    "south africa": "🇿🇦",
+    bosnia: "🇧🇦",
+    czech: "🇨🇿",
+    curacao: "🇨🇼",
+    "curaçao": "🇨🇼",
+    "cabo verde": "🇨🇻",
+    uruguay: "🇺🇾",
+    morocco: "🇲🇦",
+    australia: "🇦🇺",
+    turkey: "🇹🇷",
+    scotland: "🏴",
+    haiti: "🇭🇹",
+    ivory: "🇨🇮",
+    ecuador: "🇪🇨",
+    korea: "🇰🇷"
+  };
 
   for (const key in flags) {
     if (clean.includes(key)) return flags[key];
@@ -122,9 +121,13 @@ export default function Home() {
   return (
     <div style={styles.page}>
 
-      <h1 style={styles.title}>🏆 WTL World Cup 2026</h1>
+      {/* ✅ HEADER */}
+      <div style={styles.header}>
+        <h1>🏆 WTL World Cup 2026</h1>
+        <p style={styles.subtitle}>Live leaderboard & match results</p>
+      </div>
 
-      {/* PODIUM */}
+      {/* ✅ PODIUM */}
       <div style={styles.podium}>
 
         {top3[1] && (
@@ -153,29 +156,29 @@ export default function Home() {
 
       </div>
 
-      {/* WOODEN SPOON */}
+      {/* 🥄 WOODEN SPOON */}
       {leaderboard.length > 0 && (
         <div style={styles.wooden}>
           🥄 Wooden Spoon: <strong>{leaderboard[leaderboard.length - 1].player}</strong> ({leaderboard[leaderboard.length - 1].points} pts)
         </div>
       )}
 
-      <h2>Leaderboard</h2>
+      <h2 style={styles.section}>Leaderboard</h2>
 
       <table style={styles.table}>
         <tbody>
           {leaderboard.map((r, i) => (
-            <tr key={i}>
+            <tr key={i} style={i === 0 ? styles.leaderRow : (i % 2 ? styles.rowAlt : styles.row)}>
               <td style={styles.cell}>{r.player}</td>
               <td style={styles.cell}>{r.team1}</td>
               <td style={styles.cell}>{r.team2}</td>
-              <td style={styles.cell}>{r.points}</td>
+              <td style={styles.cell}><strong>{r.points}</strong></td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      <h2>⚽ Match Centre</h2>
+      <h2 style={styles.section}>⚽ Match Centre</h2>
 
       {matches.map((m, i) => (
         <div key={i} style={styles.card}>
@@ -186,7 +189,7 @@ export default function Home() {
 
           <div style={styles.center}>
             <strong>{m.scoreA} – {m.scoreB}</strong>
-            <div>{m.playerA} vs {m.playerB}</div>
+            <div style={styles.players}>{m.playerA} vs {m.playerB}</div>
           </div>
 
           <div style={styles.right}>
@@ -205,14 +208,15 @@ const styles = {
     background: "#0f172a",
     color: "white",
     minHeight: "100vh",
-    padding: "30px"
+    padding: "30px",
+    fontFamily: "Arial"
   },
 
-  title: {
-    marginBottom: "20px"
-  },
+  header: { marginBottom: "25px" },
+  subtitle: { opacity: 0.6 },
 
-  // PODIUM
+  section: { marginTop: "20px", marginBottom: "10px" },
+
   podium: {
     display: "flex",
     justifyContent: "center",
@@ -222,66 +226,63 @@ const styles = {
   },
 
   box: {
+    padding: "18px",
+    borderRadius: "12px",
+    textAlign: "center",
     background: "#1e293b",
-    padding: "15px",
-    borderRadius: "10px",
-    textAlign: "center"
+    boxShadow: "0 6px 16px rgba(0,0,0,0.4)"
   },
 
   first: {
     transform: "scale(1.4)",
     background: "#fbbf24",
-    color: "#000"
+    color: "#000",
+    boxShadow: "0 0 20px rgba(251,191,36,0.7)"
   },
 
-  second: {
-    marginTop: "20px"
-  },
+  second: { marginTop: "20px" },
+  third: { marginTop: "40px", opacity: 0.8 },
 
-  third: {
-    marginTop: "40px",
-    opacity: 0.8
-  },
-
-  medal: {
-    fontSize: "24px"
-  },
-
-  medalBig: {
-    fontSize: "32px"
-  },
-
-  firstName: {
-    fontWeight: "bold"
-  },
+  medal: { fontSize: "24px" },
+  medalBig: { fontSize: "34px" },
+  firstName: { fontWeight: "bold", fontSize: "18px" },
 
   wooden: {
     textAlign: "center",
     marginBottom: "30px",
-    fontSize: "14px",
     opacity: 0.7
   },
 
-  table: {
-    width: "100%",
-    marginBottom: "40px"
+  table: { width: "100%", marginBottom: "40px" },
+
+  leaderRow: {
+    background: "#fbbf24",
+    color: "#000",
+    fontWeight: "bold"
   },
 
+  row: { background: "#0f172a" },
+  rowAlt: { background: "#020617" },
+
   cell: {
-    padding: "8px"
+    padding: "10px",
+    borderBottom: "1px solid #334155"
   },
 
   card: {
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
+    padding: "14px 18px",
+    marginBottom: "12px",
+    borderRadius: "12px",
     background: "#1e293b",
-    padding: "10px",
-    marginBottom: "10px",
-    borderRadius: "8px"
+    boxShadow: "0 4px 12px rgba(0,0,0,0.4)"
   },
 
   left: { width: "35%" },
   right: { width: "35%", textAlign: "right" },
-  center: { width: "30%", textAlign: "center" }
+  center: { width: "30%", textAlign: "center" },
+
+  players: { fontSize: "12px", opacity: 0.7 }
 };
-``
