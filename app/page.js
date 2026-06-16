@@ -234,13 +234,7 @@ export default function Home() {
               {getFlag(m.teamA)} {m.teamA}
             </div>
 
-            <div style={styles.center}>
-              <div style={styles.status}>
-                <span style={status === "LIVE" ? styles.live : styles.ft}>
-                  {status}
-                </span>
-              </div>
-
+            
               <strong>{m.scoreA} – {m.scoreB}</strong>
 
               {status === "LIVE" && minute && (
