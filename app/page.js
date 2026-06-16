@@ -169,7 +169,7 @@ export default function Home() {
         <div key={i} style={styles.card}>
 
           <div style={styles.left}>
-            {getFlag(m.teamA)} {m.teamA}
+            🇮🇷 {m.teamA}
           </div>
 
           <div style={styles.center}>
