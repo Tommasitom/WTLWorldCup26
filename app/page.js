@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-// ✅ FLAGS
 function getFlag(team) {
   if (!team) return "";
 
@@ -18,30 +17,9 @@ function getFlag(team) {
     france: "🇫🇷",
     england: "🏴",
     portugal: "🇵🇹",
-    belgium: "🇧🇪",
-    netherlands: "🇳🇱",
-    japan: "🇯🇵",
-    sweden: "🇸🇪",
-    tunisia: "🇹🇳",
-    egypt: "🇪🇬",
-    iran: "🇮🇷",
-    "new zealand": "🇳🇿",
-    paraguay: "🇵🇾",
     canada: "🇨🇦",
     usa: "🇺🇸",
-    "south africa": "🇿🇦",
-    bosnia: "🇧🇦",
-    czech: "🇨🇿",
-    curacao: "🇨🇼",
-    "cabo verde": "🇨🇻",
-    uruguay: "🇺🇾",
-    morocco: "🇲🇦",
-    australia: "🇦🇺",
-    turkey: "🇹🇷",
-    scotland: "🏴",
-    haiti: "🇭🇹",
-    ecuador: "🇪🇨",
-    korea: "🇰🇷"
+    "south africa": "🇿🇦"
   };
 
   for (const key in flags) {
@@ -63,6 +41,7 @@ export default function Home() {
       .then(res => res.text())
       .then(text => {
         const rows = text.split("\n").slice(1);
+
         const data = rows.map(row => {
           const cols = row.split(",");
           return {
@@ -72,6 +51,7 @@ export default function Home() {
             points: cols[3]
           };
         });
+
         setLeaderboard(data);
       });
 
@@ -108,44 +88,41 @@ export default function Home() {
 
       <h1 style={styles.title}>🏆 WTL World Cup 2026</h1>
 
-     {/* ✅ PODIUM */}
-<div style={styles.podium}>
+      {/* PODIUM */}
+      <div style={styles.podium}>
 
-  {/* 🥈 2nd (LEFT) */}
-  {top3[1] && (
-    <div style={{...styles.playerBox, ...styles.second}}>
-      <div style={styles.medal}>🥈</div>
-      <div>{top3[1].player}</div>
-      <div style={styles.points}>{top3[1].points} pts</div>
-    </div>
-  )}
+        {top3[1] && (
+          <div style={{...styles.box, ...styles.second}}>
+            <div style={styles.medal}>🥈</div>
+            <div>{top3[1].player}</div>
+            <div>{top3[1].points} pts</div>
+          </div>
+        )}
 
-  {/* 🥇 1st (CENTER BIG) */}
-  {top3[0] && (
-    <div style={{...styles.playerBox, ...styles.first}}>
-      <div style={styles.medalLarge}>🥇</div>
-      <div style={styles.firstName}>{top3[0].player}</div>
-      <div style={styles.points}>{top3[0].points} pts</div>
-    </div>
-  )}
+        {top3[0] && (
+          <div style={{...styles.box, ...styles.first}}>
+            <div style={styles.medalBig}>🥇</div>
+            <div style={styles.firstName}>{top3[0].player}</div>
+            <div>{top3[0].points} pts</div>
+          </div>
+        )}
 
-  {/* 🥉 3rd (RIGHT SMALLER) */}
-  {top3[2] && (
-    <div style={{...styles.playerBox, ...styles.third}}>
-      <div style={styles.medal}>🥉</div>
-      <div>{top3[2].player}</div>
-      <div style={styles.points}>{top3[2].points} pts</div>
-    </div>
-  )}
+        {top3[2] && (
+          <div style={{...styles.box, ...styles.third}}>
+            <div style={styles.medal}>🥉</div>
+            <div>{top3[2].player}</div>
+            <div>{top3[2].points} pts</div>
+          </div>
+        )}
 
-</div>
+      </div>
 
-{/* 🥄 WOODEN SPOON */}
-{leaderboard.length > 0 && (
-  <div style={styles.wooden}>
-    🥄 Wooden Spoon: <strong>{leaderboard[leaderboard.length - 1].player}</strong> ({leaderboard[leaderboard.length - 1].points} pts)
-  </div>
-)}
+      {/* WOODEN SPOON */}
+      {leaderboard.length > 0 && (
+        <div style={styles.wooden}>
+          🥄 Wooden Spoon: <strong>{leaderboard[leaderboard.length - 1].player}</strong> ({leaderboard[leaderboard.length - 1].points} pts)
+        </div>
+      )}
 
       <h2>Leaderboard</h2>
 
@@ -173,9 +150,7 @@ export default function Home() {
 
           <div style={styles.center}>
             <strong>{m.scoreA} – {m.scoreB}</strong>
-            <div style={styles.players}>
-              {m.playerA} vs {m.playerB}
-            </div>
+            <div>{m.playerA} vs {m.playerB}</div>
           </div>
 
           <div style={styles.right}>
@@ -194,19 +169,72 @@ const styles = {
     background: "#0f172a",
     color: "white",
     minHeight: "100vh",
-    padding: "30px",
-    fontFamily: "Arial"
+    padding: "30px"
   },
+
   title: {
     marginBottom: "20px"
   },
+
+  // PODIUM
+  podium: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-end",
+    gap: "20px",
+    marginBottom: "20px"
+  },
+
+  box: {
+    background: "#1e293b",
+    padding: "15px",
+    borderRadius: "10px",
+    textAlign: "center"
+  },
+
+  first: {
+    transform: "scale(1.4)",
+    background: "#fbbf24",
+    color: "#000"
+  },
+
+  second: {
+    marginTop: "20px"
+  },
+
+  third: {
+    marginTop: "40px",
+    opacity: 0.8
+  },
+
+  medal: {
+    fontSize: "24px"
+  },
+
+  medalBig: {
+    fontSize: "32px"
+  },
+
+  firstName: {
+    fontWeight: "bold"
+  },
+
+  wooden: {
+    textAlign: "center",
+    marginBottom: "30px",
+    fontSize: "14px",
+    opacity: 0.7
+  },
+
   table: {
     width: "100%",
     marginBottom: "40px"
   },
+
   cell: {
     padding: "8px"
   },
+
   card: {
     display: "flex",
     justifyContent: "space-between",
@@ -215,49 +243,9 @@ const styles = {
     marginBottom: "10px",
     borderRadius: "8px"
   },
+
   left: { width: "35%" },
   right: { width: "35%", textAlign: "right" },
-  center: { width: "30%", textAlign: "center" },
-  players: { fontSize: "12px", opacity: 0.7 },
-{/* ✅ PODIUM */}
-<div style={styles.podium}>
-
-  {/* 🥈 */}
-  {top3[1] && (
-    <div style={{...styles.playerBox, ...styles.second}}>
-      <div style={styles.medal}>🥈</div>
-      <div>{top3[1]?.player}</div>
-      <div style={styles.points}>{top3[1]?.points} pts</div>
-    </div>
-  )}
-
-  {/* 🥇 */}
-  {top3[0] && (
-    <div style={{...styles.playerBox, ...styles.first}}>
-      <div style={styles.medalLarge}>🥇</div>
-      <div style={styles.firstName}>{top3[0]?.player}</div>
-      <div style={styles.points}>{top3[0]?.points} pts</div>
-    </div>
-  )}
-
-  {/* 🥉 */}
-  {top3[2] && (
-    <div style={{...styles.playerBox, ...styles.third}}>
-      <div style={styles.medal}>🥉</div>
-      <div>{top3[2]?.player}</div>
-      <div style={styles.points}>{top3[2]?.points} pts</div>
-    </div>
-  )}
-
-</div>
-
-{/* 🥄 WOODEN SPOON */}
-{leaderboard.length > 0 && (
-  <div style={styles.wooden}>
-    🥄 Wooden Spoon:{" "}
-    <strong>
-      {leaderboard[leaderboard.length - 1]?.player}
-    </strong>{" "}
-    ({leaderboard[leaderboard.length - 1]?.points} pts)
-  </div>
-)}
+  center: { width: "30%", textAlign: "center" }
+};
+``
