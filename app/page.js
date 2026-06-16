@@ -132,10 +132,14 @@ export default function Home() {
   return (
     <div style={styles.page}>
      
-      <div style={styles.header}>
-        <img src="/public-wtl-logo.png.png" style={styles.logo} alt="logo" />
-        <p style={styles.subtitle}>Live leaderboard & match results</p>
-      </div>
+     <div style={styles.header}>
+
+  <img src="/public-wtl-logo.png.png" style={styles.logo} alt="logo" />
+
+  <p style={styles.subtitle}>Live leaderboard & match results</p>
+
+</div>
+
 
       {/* PODIUM */}
       <div style={styles.podium}>
