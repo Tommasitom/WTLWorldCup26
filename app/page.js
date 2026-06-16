@@ -78,9 +78,6 @@ export default function Home() {
 
         const data = rows.map(row => {
           const cols = row.split(",");
-
-          const animationStyle = `
-
           return {
             player: cols[0],
             team1: cols[1],
@@ -131,7 +128,6 @@ export default function Home() {
 
   return (
     <div style={styles.page}>
-    <style>{animationStyle}</style>
       <div style={styles.header}>
 
         <img src="/wtl.logo.png" alt="WTL World Cup Logo" style={styles.logo} />
@@ -364,16 +360,12 @@ const styles = {
   status: { marginBottom: "4px" },
 
   live: {
-  background: "#ef4444",
-  padding: "4px 8px",
-  borderRadius: "6px",
-  fontSize: "10px",
-  fontWeight: "bold",
-  color: "white",
-  animation: "pulse 1.5s infinite",
-    boxShadow: "0 0 8px rgba(239,68,68,0.7)"
-},
-
+    background: "#ef4444",
+    padding: "2px 6px",
+    borderRadius: "6px",
+    fontSize: "10px",
+    fontWeight: "bold"
+  },
 
   ft: {
     background: "#475569",
