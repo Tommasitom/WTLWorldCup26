@@ -206,8 +206,7 @@ export default function Home() {
       <h2 style={styles.section}>⚽ Match Centre</h2>
 
       {matches.map((m, i) => {
-        const isLive = Math.random() < 0.05;
-        const status = isLive ? "LIVE" : "FT";
+        const status = "FT";
 
         return (
           <div key={i} style={styles.card}>
