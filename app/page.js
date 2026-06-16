@@ -41,39 +41,42 @@ export default function Home() {
       });
 
     // ✅ MATCHES (your original structure + CLEAN fix)
-    fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTfR46oVSmS9_cnX_4USgkAp01jXRSqvWg9kjXEKhFjviCQFh3gHhNz1vTuL9-ppDHWB-lcjbD5SPg6/pub?gid=1047828395&single=true&output=csv")
-      .then(res => res.text())
-      .then(text => {
+   fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTfR46oVSmS9_cnX_4USgkAp01jXRSqvWg9kjXEKhFjviCQFh3gHhNz1vTuL9-ppDHWB-lcjbD5SPg6/pub?gid=1047828395&single=true&output=csv")
+  .then(res => res.text())
+  .then(text => {
 
-        const rows = text.split("\n").slice(1);
-        const parsed = [];
+    const rows = text.split("\n").slice(1);
+    const parsed = [];
 
-        rows.forEach(row => {
-          const cols = row.split(",");
+    rows.forEach(row => {
+      const cols = row.split(",");
 
-          const teamA = cols[1];
-          const teamB = cols[2];
-          const scoreA = cols[3];
-          const scoreB = cols[4];
-          const playerA = cols[13];
-          const playerB = cols[14];
+      const teamA = cols[1];
+      const teamB = cols[2];
+      const scoreA = cols[3];
+      const scoreB = cols[4];
+      const playerA = cols[13];
+      const playerB = cols[14];
 
-          // ✅ skip bad rows
-          if (!teamA || !teamB) return;
+      // ✅ skip invalid rows
+      if (!teamA || !teamB) return;
 
-          parsed.push({
-            teamA: teamA,
-            teamB: teamB,
-            scoreA: scoreA || "-",
-            scoreB: scoreB || "-",
-            playerA: playerA || "",
-            playerB: playerB || ""
-          });
-        });
+      // ✅ skip matches that haven’t been played yet
+      if (scoreA === "-" || scoreB === "-" || scoreA === "" || scoreB === "") return;
 
-        // ✅ FIX ORDER (latest first)
-        setMatches(parsed.reverse());
+      parsed.push({
+        teamA,
+        teamB,
+        scoreA,
+        scoreB,
+        playerA,
+        playerB
       });
+    });
+
+    // ✅ latest matches FIRST
+    setMatches(parsed.reverse());
+  });
 
   }, []);
 
