@@ -211,21 +211,6 @@ export default function Home() {
       {matches.map((m, i) => {
 
         const status = m.status;
-        const kickoff = m.kickoff;
-
-        let minute = "";
-
-        if (status === "LIVE" && kickoff) {
-          const now = new Date();
-          const today = new Date().toISOString().split("T")[0];
-
-          const kickoffTime = new Date(`${today}T${kickoff}`);
-          const diff = Math.floor((now - kickoffTime) / 60000);
-
-          if (diff > 0) {
-            minute = diff > 90 ? "90+" : diff;
-          }
-        }
 
         return (
           <div key={i} style={styles.card}>
@@ -235,13 +220,13 @@ export default function Home() {
             </div>
 
             <div style={styles.center}>
-              <strong>{m.scoreA} – {m.scoreB}</strong>
+              <div style={styles.status}>
+                <span style={status === "LIVE" ? styles.live : styles.ft}>
+                  {status}
+                </span>
+              </div>
 
-              {status === "LIVE" && minute && (
-                <div style={styles.players}>
-                  {minute}'
-                </div>
-              )}
+              <strong>{m.scoreA} – {m.scoreB}</strong>
 
               {m.playerA && m.playerB && (
                 <div style={styles.players}>
