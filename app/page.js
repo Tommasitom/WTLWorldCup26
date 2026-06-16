@@ -107,51 +107,51 @@ export default function Home() {
       </table>
 
       {/* ✅ MATCH CENTRE */}
-      <h2>⚽ Match Centre</h2>
+     <h2>⚽ Match Centre</h2>
 
-      <div>
-        {matches.map((m, i) => {
-          return (
-            <div
-              key={i}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                background: "#1e293b",
-                padding: "12px 16px",
-                marginBottom: "10px",
-                borderRadius: "10px",
-              }}
-            >
-              {/* LEFT */}
-              <div style={{ width: "30%" }}>
-                {flags[m.teamA] || ""} {m.teamA}
-              </div>
+<div>
+  {matches.map((m, i) => {
+    return (
+      <div
+        key={i}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          background: "#1e293b",
+          padding: "10px 15px",
+          marginBottom: "10px",
+          borderRadius: "8px"
+        }}
+      >
 
-              {/* MIDDLE */}
-              <div style={{ textAlign: "center", width: "40%" }}>
-                <div style={{ fontWeight: "bold" }}>
-                  {m.scoreA} – {m.scoreB}
-                </div>
-                <div style={{ fontSize: "12px", opacity: 0.7 }}>
-                  {m.playerA} vs {m.playerB}
-                </div>
-              </div>
+        {/* LEFT TEAM */}
+        <div style={{ width: "35%", textAlign: "left" }}>
+          {flags[m.teamA] ? flags[m.teamA] + " " : ""}
+          {m.teamA}
+        </div>
 
-              {/* RIGHT */}
-              <div style={{ width: "30%", textAlign: "right" }}>
-                {m.teamB} {flags[m.teamB] || ""}
-``
-              </div>
-            </div>
-          );
-        })}
+        {/* SCORE */}
+        <div style={{ width: "30%", textAlign: "center" }}>
+          <div style={{ fontWeight: "bold", fontSize: "18px" }}>
+            {m.scoreA} – {m.scoreB}
+          </div>
+
+          <div style={{ fontSize: "12px", opacity: 0.7 }}>
+            {m.playerA} vs {m.playerB}
+          </div>
+        </div>
+
+        {/* RIGHT TEAM */}
+        <div style={{ width: "35%", textAlign: "right" }}>
+          {m.teamB}
+          {flags[m.teamB] ? " " + flags[m.teamB] : ""}
+        </div>
+
       </div>
-    </div>
-  );
-}
-
+    );
+  })}
+</div>
 const cell = {
   padding: "10px",
   borderBottom: "1px solid #334155",
