@@ -207,27 +207,27 @@ export default function Home() {
 
       <h2 style={styles.section}>⚽ Match Centre</h2>
 
-      {matches.map((m, i) => {
-       
+{matches.map((m, i) => {
 
+  const status = m.status;
+  const kickoff = m.kickoff;
 
-      const status = m.status;
-const kickoff = m.kickoff;
+  let minute = "";
 
-let minute = "";
+  if (status === "LIVE" && kickoff) {
+    const now = new Date();
+    const today = new Date().toISOString().split("T")[0];
 
-if (status === "LIVE" && kickoff) {
-  const now = new Date();
-  const today = new Date().toISOString().split("T")[0];
+    const kickoffTime = new Date(`${today}T${kickoff}`);
+    const diff = Math.floor((now - kickoffTime) / 60000);
 
-  const kickoffTime = new Date(`${today}T${kickoff}`);
-  const diff = Math.floor((now - kickoffTime) / 60000);
-
-  if (diff > 0) {
-    minute = diff > 90 ? "90+" : diff;
+    if (diff > 0) {
+      minute = diff > 90 ? "90+" : diff;
+    }
   }
-}
 
+  return (
+    <div key={i} style={styles.card}>
 return (
   <div key={i} style={styles.card}>
 
