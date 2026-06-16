@@ -106,8 +106,8 @@ export default function Home() {
           const scoreB = cols[4];
 
           // ✅ FIXED PLAYER CLEANING
-const playerA = cols[12]?.trim();
-const playerB = cols[13]?.trim();
+const playerA = cols[8]?.trim();
+const playerB = cols[9]?.trim();
 ``
 
 
