@@ -368,6 +368,16 @@ const styles = {
   },
 
   ft: {
+    liveDot: {
+  display: "inline-block",
+  width: "6px",
+  height: "6px",
+  borderRadius: "50%",
+  background: "#ef4444",
+  marginRight: "5px",
+  animation: "blink 1s infinite"
+},
+``
     background: "#475569",
     padding: "2px 6px",
     borderRadius: "6px",
