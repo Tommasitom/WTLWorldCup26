@@ -211,8 +211,7 @@ export default function Home() {
        
 
 
-        return (
-          <div key={i} style={styles.card}>const status = m.status;
+      const status = m.status;
 const kickoff = m.kickoff;
 
 let minute = "";
@@ -228,6 +227,9 @@ if (status === "LIVE" && kickoff) {
     minute = diff > 90 ? "90+" : diff;
   }
 }
+
+return (
+  <div key={i} style={styles.card}>
 
             <div style={styles.left}>
               {getFlag(m.teamA)} {m.teamA}
