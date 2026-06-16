@@ -6,11 +6,60 @@ import { useEffect, useState } from "react";
 function getFlag(team) {
   if (!team) return "";
 
-  if (team.includes("Mexico")) return "🇲🇽";
-  if (team.includes("Spain")) return "🇪🇸";
-  if (team.includes("Germany")) return "🇩🇪";
-  if (team.includes("Brazil")) return "🇧🇷";
-  if (team.includes("Canada")) return "🇨🇦";
+  const t = team.toLowerCase();
+
+  const flags = {
+    mexico: "🇲🇽",
+    spain: "🇪🇸",
+    germany: "🇩🇪",
+    brazil: "🇧🇷",
+    argentina: "🇦🇷",
+    france: "🇫🇷",
+    england: "🏴",
+    portugal: "🇵🇹",
+    belgium: "🇧🇪",
+    netherlands: "🇳🇱",
+    japan: "🇯🇵",
+    sweden: "🇸🇪",
+    tunisia: "🇹🇳",
+    egypt: "🇪🇬",
+    iran: "🇮🇷",
+    "new zealand": "🇳🇿",
+    senegal: "🇸🇳",
+    norway: "🇳🇴",
+    algeria: "🇩🇿",
+    croatia: "🇭🇷",
+    ghana: "🇬🇭",
+    panama: "🇵🇦",
+    colombia: "🇨🇴",
+    switzerland: "🇨🇭",
+    qatar: "🇶🇦",
+    saudi: "🇸🇦",
+    iraq: "🇮🇶",
+    uzbekistan: "🇺🇿",
+    paraguay: "🇵🇾",
+    canada: "🇨🇦",
+    usa: "🇺🇸",
+    "south africa": "🇿🇦",
+    bosnia: "🇧🇦",
+    czech: "🇨🇿",
+    curacao: "🇨🇼",
+    "curaçao": "🇨🇼",
+    "cabo verde": "🇨🇻",
+    uruguay: "🇺🇾",
+    morocco: "🇲🇦",
+    australia: "🇦🇺",
+    turkey: "🇹🇷",
+    scotland: "🏴",
+    haiti: "🇭🇹",
+    ivory: "🇨🇮",
+    ecuador: "🇪🇨",
+    korea: "🇰🇷"
+  };
+
+  for (const key in flags) {
+    if (t.includes(key)) return flags[key];
+  }
 
   return "";
 }
