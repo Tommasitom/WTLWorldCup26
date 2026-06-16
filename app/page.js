@@ -219,47 +219,45 @@ const styles = {
   right: { width: "35%", textAlign: "right" },
   center: { width: "30%", textAlign: "center" },
   players: { fontSize: "12px", opacity: 0.7 },
- podium: {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "flex-end",
-  gap: "20px",
-  marginBottom: "30px"
-},
+{/* ✅ PODIUM */}
+<div style={styles.podium}>
 
-first: {
-  transform: "scale(1.4)",
-  background: "#fbbf24",
-  color: "#000",
-  zIndex: 2
-},
+  {/* 🥈 */}
+  {top3[1] && (
+    <div style={{...styles.playerBox, ...styles.second}}>
+      <div style={styles.medal}>🥈</div>
+      <div>{top3[1]?.player}</div>
+      <div style={styles.points}>{top3[1]?.points} pts</div>
+    </div>
+  )}
 
-second: {
-  transform: "scale(1)",
-  marginTop: "30px"
-},
+  {/* 🥇 */}
+  {top3[0] && (
+    <div style={{...styles.playerBox, ...styles.first}}>
+      <div style={styles.medalLarge}>🥇</div>
+      <div style={styles.firstName}>{top3[0]?.player}</div>
+      <div style={styles.points}>{top3[0]?.points} pts</div>
+    </div>
+  )}
 
-third: {
-  transform: "scale(0.9)",
-  marginTop: "50px",
-  opacity: 0.85
-},
+  {/* 🥉 */}
+  {top3[2] && (
+    <div style={{...styles.playerBox, ...styles.third}}>
+      <div style={styles.medal}>🥉</div>
+      <div>{top3[2]?.player}</div>
+      <div style={styles.points}>{top3[2]?.points} pts</div>
+    </div>
+  )}
 
-medalLarge: {
-  fontSize: "36px",
-  marginBottom: "8px"
-},
+</div>
 
-firstName: {
-  fontSize: "18px",
-  fontWeight: "bold"
-},
-
-
-wooden: {
-  textAlign: "center",
-  marginBottom: "30px",
-  fontSize: "16px",
-  color: "#f87171"   // red tone
-}
-
+{/* 🥄 WOODEN SPOON */}
+{leaderboard.length > 0 && (
+  <div style={styles.wooden}>
+    🥄 Wooden Spoon:{" "}
+    <strong>
+      {leaderboard[leaderboard.length - 1]?.player}
+    </strong>{" "}
+    ({leaderboard[leaderboard.length - 1]?.points} pts)
+  </div>
+)}
