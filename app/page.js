@@ -44,7 +44,6 @@ function getFlag(team) {
     bosnia: "🇧🇦",
     czech: "🇨🇿",
     curacao: "🇨🇼",
-    "curaçao": "🇨🇼",
     "cabo verde": "🇨🇻",
     uruguay: "🇺🇾",
     morocco: "🇲🇦",
@@ -153,6 +152,14 @@ export default function Home() {
         )}
       </div>
 
+      {/* 💰 PRIZE BOX */}
+      <div style={styles.prizeBox}>
+        <div>🥇 €150</div>
+        <div>🥈 €80</div>
+        <div>🥉 €40</div>
+        <div style={styles.spoonPrize}>🥄 €0 😅</div>
+      </div>
+
       {/* WOODEN SPOON */}
       {leaderboard.length > 0 && (
         <div style={styles.wooden}>
@@ -198,8 +205,10 @@ export default function Home() {
               </div>
 
               <strong>{m.scoreA} – {m.scoreB}</strong>
+
+              {/* ✅ PLAYER NAMES */}
               <div style={styles.players}>
-                {m.playerA} vs {m.playerB}
+                {m.playerA || "TBC"} vs {m.playerB || "TBC"}
               </div>
 
             </div>
@@ -259,6 +268,16 @@ const styles = {
 
   firstName: { fontWeight: "bold", fontSize: "18px" },
 
+  prizeBox: {
+    display: "flex",
+    justifyContent: "center",
+    gap: "30px",
+    marginBottom: "25px",
+    fontWeight: "bold"
+  },
+
+  spoonPrize: { opacity: 0.6 },
+
   wooden: {
     textAlign: "center",
     marginBottom: "30px",
@@ -291,9 +310,7 @@ const styles = {
     background: "#1e293b"
   },
 
-  status: {
-    marginBottom: "4px"
-  },
+  status: { marginBottom: "4px" },
 
   live: {
     background: "#ef4444",
