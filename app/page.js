@@ -107,19 +107,21 @@ export default function Home() {
 
           const playerA = cols[8]?.trim();
           const playerB = cols[9]?.trim();
+          const kickoff = cols[11];
 
           if (!teamA || !teamB) return;
           if (!scoreA || !scoreB || scoreA === "-" || scoreB === "-") return;
 
-          parsed.push({
-            teamA,
-            teamB,
-            scoreA,
-            scoreB,
-            playerA: playerA || "",
-            playerB: playerB || ""
-          });
-        });
+        parsed.push({
+  teamA,
+  teamB,
+  scoreA,
+  scoreB,
+  playerA: playerA || "",
+  playerB: playerB || "",
+  kickoff: kickoff || "",
+  status: cols[5] || ""
+});
 
         setMatches(parsed.reverse());
       });
@@ -206,7 +208,23 @@ export default function Home() {
       <h2 style={styles.section}>⚽ Match Centre</h2>
 
       {matches.map((m, i) => {
-        const status = "FT";
+        const status = m.status;
+        const kickoff = m.kickoff;
+
+let minute = "";
+
+if (status === "LIVE" && kickoff) {
+  const now = new Date();
+  const today = new Date().toISOString().split("T")[0];
+
+  const kickoffTime = new Date(`${today}T${kickoff}`);
+  const diff = Math.floor((now - kickoffTime) / 60000);
+
+  if (diff > 0) {
+    minute = diff > 90 ? "90+" : diff;
+  }
+}
+
 
         return (
           <div key={i} style={styles.card}>
@@ -223,6 +241,11 @@ export default function Home() {
               </div>
 
               <strong>{m.scoreA} – {m.scoreB}</strong>
+{status === "LIVE" && minute && (
+  <div style={styles.players}>
+    {minute}'
+  </div>
+)}
 
               {m.playerA && m.playerB && (
                 <div style={styles.players}>
