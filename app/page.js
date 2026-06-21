@@ -78,6 +78,7 @@ const prizeIcons = {
 export default function Home() {
   const [leaderboard, setLeaderboard] = useState([]);
   const [matches, setMatches] = useState([]);
+  const [fixtures, setFixtures] = useState([]);
   const [sidePrizes, setSidePrizes] = useState([]);
 
   const top3 = leaderboard.slice(0, 3);
@@ -104,36 +105,31 @@ export default function Home() {
       .then(res => res.text())
       .then(text => {
         const rows = text.split("\n").slice(1);
-        const parsed = [];
+        const results = [];
+        const upcoming = [];
 
         rows.forEach(row => {
-          console.log(row.split(","));
           const cols = row.split(",");
 
-          const teamA = cols[1];
-          const teamB = cols[2];
-          const scoreA = cols[3];
-          const scoreB = cols[4];
-          const playerA = cols[8]?.trim();
-          const playerB = cols[9]?.trim();
-          const kickoff = cols[11];
+          const teamA = cols[1]?.trim();
+          const teamB = cols[2]?.trim();
+          const scoreA = cols[3]?.trim();
+          const scoreB = cols[4]?.trim();
+          const status = cols[7]?.trim() || "";
+          const playerA = cols[8]?.trim() || "";
+          const playerB = cols[9]?.trim() || "";
 
           if (!teamA || !teamB) return;
-          if (!scoreA || !scoreB || scoreA === "-" || scoreB === "-") return;
 
-          parsed.push({
-            teamA,
-            teamB,
-            scoreA,
-            scoreB,
-            playerA: playerA || "",
-            playerB: playerB || "",
-            kickoff: kickoff || "",
-            status: cols[7] || ""
-          });
+          if (status === "SCHEDULED") {
+            upcoming.push({ teamA, teamB, playerA, playerB });
+          } else if (scoreA && scoreB && scoreA !== "-" && scoreB !== "-") {
+            results.push({ teamA, teamB, scoreA, scoreB, playerA, playerB, status });
+          }
         });
 
-        setMatches(parsed.reverse());
+        setMatches(results.reverse());
+        setFixtures(upcoming);
       });
 
     fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTfR46oVSmS9_cnX_4USgkAp01jXRSqvWg9kjXEKhFjviCQFh3gHhNz1vTuL9-ppDHWB-lcjbD5SPg6/pub?gid=1120915220&single=true&output=csv")
@@ -154,6 +150,15 @@ export default function Home() {
 
   return (
     <div style={styles.page}>
+
+      {/* NAV */}
+      <div style={styles.nav}>
+        <a href="#fixtures" style={styles.navButton}>📅 Fixtures</a>
+        <a href="#matches" style={styles.navButton}>⚽ Results</a>
+        <a href="#leaderboard" style={styles.navButton}>🏆 Leaderboard</a>
+        <a href="#podcast" style={styles.navButton}>🎙️ Podcast</a>
+      </div>
+
       <div style={styles.header}>
         <img src="/wtl.logo.png" alt="WTL World Cup Logo" style={styles.logo} />
         <p style={styles.subtitle}>Live leaderboard & match results</p>
@@ -224,7 +229,7 @@ export default function Home() {
         </div>
       )}
 
-      <h2 style={styles.section}>Leaderboard</h2>
+      <h2 id="leaderboard" style={styles.section}>Leaderboard</h2>
 
       <table style={styles.table}>
         <tbody>
@@ -240,7 +245,7 @@ export default function Home() {
       </table>
 
       {/* 🎙️ PODCAST */}
-      <h2 style={styles.section}>🎙️ Weekly Podcast</h2>
+      <h2 id="podcast" style={styles.section}>🎙️ Weekly Podcast</h2>
 
       {episodes.map((ep) => (
         <div key={ep.number} style={styles.episodeCard}>
@@ -251,17 +256,16 @@ export default function Home() {
         </div>
       ))}
 
-      <h2 style={styles.section}>⚽ Match Centre</h2>
+      {/* ⚽ RESULTS */}
+      <h2 id="matches" style={styles.section}>⚽ Match Centre</h2>
 
       {matches.map((m, i) => {
         const status = m.status;
-
         return (
           <div key={i} style={styles.card}>
             <div style={styles.left}>
               {getFlag(m.teamA)} {m.teamA}
             </div>
-
             <div style={styles.center}>
               <div style={styles.status}>
                 <span style={status === "LIVE" ? styles.live : styles.ft}>
@@ -275,13 +279,39 @@ export default function Home() {
                 </div>
               )}
             </div>
-
             <div style={styles.right}>
               {m.teamB} {getFlag(m.teamB)}
             </div>
           </div>
         );
       })}
+
+      {/* 📅 FIXTURES */}
+      <h2 id="fixtures" style={styles.section}>📅 Upcoming Fixtures</h2>
+
+      {fixtures.length === 0 && (
+        <p style={{ opacity: 0.5, textAlign: "center" }}>No upcoming fixtures</p>
+      )}
+
+      {fixtures.map((f, i) => (
+        <div key={i} style={styles.fixtureCard}>
+          <div style={styles.left}>
+            {getFlag(f.teamA)} {f.teamA}
+          </div>
+          <div style={styles.center}>
+            <div style={styles.scheduledBadge}>UPCOMING</div>
+            {f.playerA && f.playerB && (
+              <div style={styles.players}>
+                {f.playerA} vs {f.playerB}
+              </div>
+            )}
+          </div>
+          <div style={styles.right}>
+            {f.teamB} {getFlag(f.teamB)}
+          </div>
+        </div>
+      ))}
+
     </div>
   );
 }
@@ -292,6 +322,24 @@ const styles = {
     color: "white",
     minHeight: "100vh",
     padding: "30px"
+  },
+
+  nav: {
+    display: "flex",
+    justifyContent: "center",
+    gap: "10px",
+    marginBottom: "20px",
+    flexWrap: "wrap"
+  },
+
+  navButton: {
+    background: "#1e293b",
+    color: "white",
+    padding: "8px 16px",
+    borderRadius: "20px",
+    textDecoration: "none",
+    fontSize: "13px",
+    fontWeight: "bold"
   },
 
   header: {
@@ -419,6 +467,17 @@ const styles = {
     background: "#1e293b"
   },
 
+  fixtureCard: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "14px 18px",
+    marginBottom: "12px",
+    borderRadius: "12px",
+    background: "#0f2a1a",
+    border: "1px solid #1e4d2b"
+  },
+
   episodeCard: {
     background: "#1e293b",
     borderRadius: "12px",
@@ -433,6 +492,16 @@ const styles = {
   },
 
   status: { marginBottom: "4px" },
+
+  scheduledBadge: {
+    background: "#166534",
+    padding: "2px 6px",
+    borderRadius: "6px",
+    fontSize: "10px",
+    fontWeight: "bold",
+    marginBottom: "4px",
+    display: "inline-block"
+  },
 
   live: {
     background: "#ef4444",
