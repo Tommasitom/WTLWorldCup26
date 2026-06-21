@@ -67,9 +67,18 @@ const episodes = [
   { number: 1, title: "Episode 1 – The Tournament Begins", file: "/podcast-ep1.mp3" },
 ];
 
+const prizeIcons = {
+  "First Red Card": "🟥",
+  "First Hat Trick": "🎩",
+  "First Missed Penalty": "❌",
+  "Most Goals": "⚽",
+  "First Own Goal": "🥅"
+};
+
 export default function Home() {
   const [leaderboard, setLeaderboard] = useState([]);
   const [matches, setMatches] = useState([]);
+  const [sidePrizes, setSidePrizes] = useState([]);
 
   const top3 = leaderboard.slice(0, 3);
 
@@ -79,7 +88,6 @@ export default function Home() {
       .then(res => res.text())
       .then(text => {
         const rows = text.split("\n").slice(1);
-
         const data = rows.map(row => {
           const cols = row.split(",");
           return {
@@ -89,14 +97,12 @@ export default function Home() {
             points: cols[3]
           };
         });
-
         setLeaderboard(data);
       });
 
     fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTfR46oVSmS9_cnX_4USgkAp01jXRSqvWg9kjXEKhFjviCQFh3gHhNz1vTuL9-ppDHWB-lcjbD5SPg6/pub?gid=1047828395&single=true&output=csv")
       .then(res => res.text())
       .then(text => {
-
         const rows = text.split("\n").slice(1);
         const parsed = [];
 
@@ -108,7 +114,6 @@ export default function Home() {
           const teamB = cols[2];
           const scoreA = cols[3];
           const scoreB = cols[4];
-
           const playerA = cols[8]?.trim();
           const playerB = cols[9]?.trim();
           const kickoff = cols[11];
@@ -131,16 +136,27 @@ export default function Home() {
         setMatches(parsed.reverse());
       });
 
+    fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTfR46oVSmS9_cnX_4USgkAp01jXRSqvWg9kjXEKhFjviCQFh3gHhNz1vTuL9-ppDHWB-lcjbD5SPg6/pub?gid=1120915220&single=true&output=csv")
+      .then(res => res.text())
+      .then(text => {
+        const rows = text.split("\n").slice(1);
+        const data = rows.map(row => {
+          const cols = row.split(",");
+          return {
+            event: cols[0]?.trim(),
+            winner: cols[1]?.trim() || ""
+          };
+        }).filter(r => r.event);
+        setSidePrizes(data);
+      });
+
   }, []);
 
   return (
     <div style={styles.page}>
       <div style={styles.header}>
-
         <img src="/wtl.logo.png" alt="WTL World Cup Logo" style={styles.logo} />
-
         <p style={styles.subtitle}>Live leaderboard & match results</p>
-
       </div>
 
       {/* PODIUM */}
@@ -180,11 +196,24 @@ export default function Home() {
         </div>
 
         <div style={styles.sidePrizes}>
-          <div>🟥 First Red Card — €10</div>
-          <div>🎩 First Hat-Trick — €10</div>
-          <div>❌ First Missed Penalty — €10</div>
-          <div>⚽ Most Goals — €10</div>
-          <div>🥅 First Own Goal — €10</div>
+          {sidePrizes.length > 0 ? sidePrizes.map((p, i) => (
+            <div key={i} style={styles.sidePrizeItem}>
+              <div>{prizeIcons[p.event] || "🏆"} {p.event} — €10</div>
+              {p.winner ? (
+                <div style={styles.prizeWinner}>🏅 {p.winner}</div>
+              ) : (
+                <div style={styles.prizeUnclaimed}>Unclaimed</div>
+              )}
+            </div>
+          )) : (
+            <>
+              <div>🟥 First Red Card — €10</div>
+              <div>🎩 First Hat-Trick — €10</div>
+              <div>❌ First Missed Penalty — €10</div>
+              <div>⚽ Most Goals — €10</div>
+              <div>🥅 First Own Goal — €10</div>
+            </>
+          )}
         </div>
       </div>
 
@@ -225,12 +254,10 @@ export default function Home() {
       <h2 style={styles.section}>⚽ Match Centre</h2>
 
       {matches.map((m, i) => {
-
         const status = m.status;
 
         return (
           <div key={i} style={styles.card}>
-
             <div style={styles.left}>
               {getFlag(m.teamA)} {m.teamA}
             </div>
@@ -241,9 +268,7 @@ export default function Home() {
                   {status}
                 </span>
               </div>
-
               <strong>{m.scoreA} – {m.scoreB}</strong>
-
               {m.playerA && m.playerB && (
                 <div style={styles.players}>
                   {m.playerA} vs {m.playerB}
@@ -254,7 +279,6 @@ export default function Home() {
             <div style={styles.right}>
               {m.teamB} {getFlag(m.teamB)}
             </div>
-
           </div>
         );
       })}
@@ -338,6 +362,25 @@ const styles = {
     gap: "15px",
     fontSize: "13px",
     opacity: 0.85
+  },
+
+  sidePrizeItem: {
+    textAlign: "center",
+    minWidth: "140px"
+  },
+
+  prizeWinner: {
+    marginTop: "4px",
+    color: "#fbbf24",
+    fontWeight: "bold",
+    fontSize: "12px"
+  },
+
+  prizeUnclaimed: {
+    marginTop: "4px",
+    opacity: 0.4,
+    fontSize: "11px",
+    fontStyle: "italic"
   },
 
   spoonPrize: {
