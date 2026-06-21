@@ -63,6 +63,10 @@ function getFlag(team) {
   return "";
 }
 
+const episodes = [
+  { number: 1, title: "Episode 1 – The Tournament Begins", file: "/podcast-ep1.mp3" },
+];
+
 export default function Home() {
   const [leaderboard, setLeaderboard] = useState([]);
   const [matches, setMatches] = useState([]);
@@ -205,6 +209,18 @@ export default function Home() {
           ))}
         </tbody>
       </table>
+
+      {/* 🎙️ PODCAST */}
+      <h2 style={styles.section}>🎙️ Weekly Podcast</h2>
+
+      {episodes.map((ep) => (
+        <div key={ep.number} style={styles.episodeCard}>
+          <p style={styles.episodeTitle}>{ep.title}</p>
+          <audio controls style={{ width: "100%" }}>
+            <source src={ep.file} type="audio/mpeg" />
+          </audio>
+        </div>
+      ))}
 
       <h2 style={styles.section}>⚽ Match Centre</h2>
 
@@ -358,6 +374,19 @@ const styles = {
     marginBottom: "12px",
     borderRadius: "12px",
     background: "#1e293b"
+  },
+
+  episodeCard: {
+    background: "#1e293b",
+    borderRadius: "12px",
+    padding: "16px",
+    marginBottom: "16px"
+  },
+
+  episodeTitle: {
+    margin: "0 0 10px 0",
+    fontWeight: "bold",
+    fontSize: "14px"
   },
 
   status: { marginBottom: "4px" },
