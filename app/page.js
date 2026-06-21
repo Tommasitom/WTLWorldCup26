@@ -435,10 +435,15 @@ const styles = {
     opacity: 0.7
   },
 
-  wooden: {
+ wooden: {
     textAlign: "center",
     marginBottom: "30px",
-    opacity: 0.7
+    background: "#422006",
+    border: "1px solid #854d0e",
+    borderRadius: "12px",
+    padding: "14px 20px",
+    color: "#fbbf24",
+    fontWeight: "bold"
   },
 
   table: { width: "100%", marginBottom: "40px" },
