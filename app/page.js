@@ -64,6 +64,7 @@ function getFlag(team) {
 }
 
 const episodes = [
+  { number: 2, title: "Episode 2 – Week 2 Carnage", file: "/podcast-ep2.mp3" },
   { number: 1, title: "Episode 1 – The Tournament Begins", file: "/podcast-ep1.mp3" },
 ];
 
