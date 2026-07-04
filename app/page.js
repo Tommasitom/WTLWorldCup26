@@ -64,6 +64,7 @@ function getFlag(team) {
 }
 
 const episodes = [
+  { number: 4, title: "Episode 4 – The Departures Lounge", file: "/podcast-ep4.mp3" },
   { number: 3, title: "Episode 3 – Groups Finish", file: "/podcast-ep3.mp3" },
   { number: 2, title: "Episode 2 – Week 2 Carnage", file: "/podcast-ep2.mp3" },
   { number: 1, title: "Episode 1 – The Tournament Begins", file: "/podcast-ep1.mp3" },
