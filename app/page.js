@@ -64,6 +64,7 @@ function getFlag(team) {
 }
 
 const episodes = [
+  { number: 8, title: "Episode 8 – The End of the Road", file: "/podcast-ep8.mp3" },
   { number: 7, title: "Episode 7 – At Least England Didn't Win", file: "/podcast-ep7.mp3" },
   { number: 6, title: "Episode 6 – Four Teams One Van", file: "/podcast-ep6.mp3" },
   { number: 5, title: "Episode 5 – Seven Survivors", file: "/podcast-ep5.mp3" },
